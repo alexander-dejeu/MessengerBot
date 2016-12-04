@@ -104,7 +104,7 @@ function helpMessage(recipientId, text) {
 
     text = text || "";
     var values = text.split(' ');
-    if values[0] === 'help') {
+    if (values[0] === 'help') {
             message = {
                 "attachment": {
                     "type": "template",
