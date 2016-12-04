@@ -72,22 +72,18 @@ function kittenMessage(recipientId, text) {
                     "payload": {
                         "template_type": "generic",
                         "elements": [{
-                            "title": "Get Help",
-                            "subtitle": "What is your most urgent need",
+                            "title": "Kitten",
+                            "subtitle": "Cute kitten picture",
+                            "image_url": imageUrl ,
                             "buttons": [{
-                                "type": "postback",
-                                "title": "Necessities",
-                                "payload": "Another function!"
+                                "type": "web_url",
+                                "url": imageUrl,
+                                "title": "Show kitten"
                                 }, {
                                 "type": "postback",
-                                "title": "Technology",
-                                "payload": "User " + recipientId + " likes kitten "
-                                }, {
-                                "type": "postback",
-                                "title": "Crisies",
-                                "payload": "I need help now"
-                            }
-                        ]
+                                "title": "I like this",
+                                "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                            }]
                         }]
                     }
                 }
@@ -108,30 +104,28 @@ function helpMessage(recipientId, text) {
 
     text = text || "";
     var values = text.split(' ');
-
-    if (values.length === 3 && values[0] === 'kitten') {
-        if (Number(values[1]) > 0 && Number(values[2]) > 0) {
-
-            var imageUrl = "https://placekitten.com/" + Number(values[1]) + "/" + Number(values[2]);
-
             message = {
                 "attachment": {
                     "type": "template",
                     "payload": {
                         "template_type": "generic",
                         "elements": [{
-                            "title": "Kitten",
-                            "subtitle": "Cute kitten picture",
-                            "image_url": imageUrl ,
+                            "title": "Get Help",
+                            "subtitle": "What is your most urgent need",
                             "buttons": [{
-                                "type": "web_url",
-                                "url": imageUrl,
-                                "title": "Show kitten"
+                                "type": "postback",
+                                "title": "Necessities",
+                                "payload": "Another function!"
                                 }, {
                                 "type": "postback",
-                                "title": "I like this",
-                                "payload": "User " + recipientId + " likes kitten " + imageUrl,
-                            }]
+                                "title": "Technology",
+                                "payload": "User " + recipientId + " likes kitten "
+                                }, {
+                                "type": "postback",
+                                "title": "Crisies",
+                                "payload": "I need help now"
+                            }
+                        ]
                         }]
                     }
                 }
