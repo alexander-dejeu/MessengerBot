@@ -28,8 +28,8 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-            if (!kittenMessage(event.sender.id, event.message.text)) {
-                sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
+            if (!helpMessage(event.sender.id, event.message.text)) {
+                sendMessage(event.sender.id, {text: "Sorry I do not understand Type help: " + event.message.text});
             }
         }
     }
@@ -57,6 +57,54 @@ function sendMessage(recipientId, message) {
 
 // send rich message with kitten
 function kittenMessage(recipientId, text) {
+
+    text = text || "";
+    var values = text.split(' ');
+
+    if (values.length === 3 && values[0] === 'kitten') {
+        if (Number(values[1]) > 0 && Number(values[2]) > 0) {
+
+            var imageUrl = "https://placekitten.com/" + Number(values[1]) + "/" + Number(values[2]);
+
+            message = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": [{
+                            "title": "Get Help",
+                            "subtitle": "What is your most urgent need",
+                            "buttons": [{
+                                "type": "postback",
+                                "title": "Necessities",
+                                "payload": "Another function!"
+                                }, {
+                                "type": "postback",
+                                "title": "Technology",
+                                "payload": "User " + recipientId + " likes kitten "
+                                }, {
+                                "type": "postback",
+                                "title": "Crisies",
+                                "payload": "I need help now"
+                            }
+                        ]
+                        }]
+                    }
+                }
+            };
+
+            sendMessage(recipientId, message);
+
+            return true;
+        }
+    }
+
+    return false;
+
+};
+
+// send rich message with kitten
+function helpMessage(recipientId, text) {
 
     text = text || "";
     var values = text.split(' ');
