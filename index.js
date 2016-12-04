@@ -104,6 +104,7 @@ function helpMessage(recipientId, text) {
 
     text = text || "";
     var values = text.split(' ');
+    if values[0] === 'kitten') {
             message = {
                 "attachment": {
                     "type": "template",
@@ -135,8 +136,5 @@ function helpMessage(recipientId, text) {
 
             return true;
         }
-    }
-
-    return false;
-
-};
+        return false;
+    };
